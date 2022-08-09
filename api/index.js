@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const userRoute = require("./routes/users")
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
+const imageRoute = require("./routes/image");
 
 var cors = require('cors');
 app.use(cors());
@@ -19,10 +20,7 @@ app.use(express.json());
 app.use("/api/auth",authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/products",productRoute);
-
-
-
-
+app.use("/api/images",imageRoute);
 
 
 

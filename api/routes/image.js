@@ -1,5 +1,5 @@
 // const { Router } = require('express');
-const Product = require("../models/Product");
+const Image = require("../models/Images");
 const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = require('./verifyToken');
 
 const router = require('express').Router();
@@ -7,11 +7,11 @@ const router = require('express').Router();
 
 // CREATE PRODUCT
 router.post("/",verifyTokenAndAdmin,async(req,res)=>{
-     const newProduct = new Product(req.body)
+     const newImage = new Image(req.body)
 
      try{
-        const savedProduct = await newProduct.save();
-        res.status(200).json(savedProduct)
+        const savedImage = await newImage.save();
+        res.status(200).json(savedImage)
 
      }catch(err){
         res.status(500).json(err);
@@ -50,9 +50,9 @@ router.delete("/:id",verifyTokenAndAdmin,async(req,res)=>{
 
 router.get("/find/:id",async(req,res)=>{
     try{
-        const product = await Product.findById(req.params.id)
+        const image = await Image.findById(req.params.id)
         // const {password , ...others} = user._doc;
-        res.status(200).json(product );
+        res.status(200).json(image);
     }catch(err){
         res.status(500).json(err);
         console.log(err)
@@ -62,16 +62,16 @@ router.get("/find/:id",async(req,res)=>{
 // GET ALL USER 
 
 
-// router.get("/",verifyTokenAndAdmin,async(req,res)=>{
-//     try{
-//         const users = await User.find();
+router.get("/",async(req,res)=>{
+    try{
+        const img = await Image.find();
         
-//         res.status(200).json(users);
-//     }catch(err){
-//         res.status(500).json(err);
-//         console.log(err)
-//     }
-// })
+        res.status(200).json(img);
+    }catch(err){
+        res.status(500).json(err);
+        console.log(err)
+    }
+})
 
 
 router.get("/", async (req, res) => {
